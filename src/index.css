@@ -1,0 +1,233 @@
+/* ============================================================
+   DESIGN SYSTEM — Nojus Peciukonis Portfolio
+   Swiss design principles: grid, precision, typography
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('/fonts/GoogleSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* --- Typography --- */
+  --font-display: 'Roobert', 'Syne', sans-serif;
+  --font-hero: 'Google Sans', 'Roobert', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* --- Color Palette — Digital Avant-Garde (Light) --- */
+  --color-bg: #f9f9f9;                          /* Background */
+  --color-bg-alt: #f3f3f3;                      /* surface-container-low */
+  --color-surface: #e8e8e8;                     /* surface-container-high */
+  --color-surface-lowest: #ffffff;              /* floating cards */
+  --color-border: rgba(196,197,218,0.15);       /* ghost border — never 100% opaque */
+  --color-text: #0a0a0a;
+  --color-text-muted: rgba(10,10,10,0.4);
+  --color-text-secondary: rgba(10,10,10,0.65);
+  --color-accent: #c3f400;                      /* Neon Green — secondary, CTAs */
+  --color-accent-text: #161f00;                 /* on-secondary text */
+  --color-primary: #0024c1;                     /* Electric Blue — interactive, high-signal */
+  --color-primary-container: #0033ff;
+  --color-red: #ff3333;
+
+  /* --- Swiss Grid --- */
+  --grid-cols: 12;
+  --grid-gap: clamp(16px, 2vw, 32px);
+  --margin: clamp(24px, 5vw, 80px);
+
+  /* --- Spacing scale --- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+  --space-2xl: 12rem;
+
+  /* --- Type scale --- */
+  --text-xs: clamp(0.65rem, 0.8vw, 0.75rem);
+  --text-sm: clamp(0.75rem, 1vw, 0.875rem);
+  --text-base: clamp(0.9rem, 1.1vw, 1rem);
+  --text-md: clamp(1rem, 1.4vw, 1.25rem);
+  --text-lg: clamp(1.25rem, 2vw, 1.75rem);
+  --text-xl: clamp(2rem, 4vw, 3.5rem);
+  --text-2xl: clamp(3rem, 7vw, 6rem);
+  --text-3xl: clamp(4rem, 10vw, 9rem);
+  --text-hero: clamp(5rem, 14vw, 14rem);
+
+  /* --- Motion --- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.5s;
+  --duration-slow: 0.9s;
+  --duration-slower: 1.4s;
+
+  /* --- Radii — 0px: hard edges, mathematical precision --- */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-pill: 0px;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: auto;
+
+  /* Crisp font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+/* High-DPI / retina image sharpness */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+
+.text-hero    { font-size: var(--text-hero); }
+.text-3xl     { font-size: var(--text-3xl); }
+.text-2xl     { font-size: var(--text-2xl); }
+.text-xl      { font-size: var(--text-xl); }
+.text-lg      { font-size: var(--text-lg); }
+.text-md      { font-size: var(--text-md); }
+.text-base    { font-size: var(--text-base); }
+.text-sm      { font-size: var(--text-sm); }
+.text-xs      { font-size: var(--text-xs); }
+
+.text-muted   { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-accent  { color: var(--color-primary); }
+.uppercase    { text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--margin);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+}
+
+/* ============================================================
+   SECTION DIVIDERS — "No-Line" Rule: use bg shifts, not borders
+   ============================================================ */
+
+.rule {
+  display: none;
+}
+
+/* ============================================================
+   PAGE TRANSITIONS
+   ============================================================ */
+
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+/* ============================================================
+   AMBIENT GLOW — tinted blue, not black shadows
+   ============================================================ */
+
+.ambient-glow {
+  box-shadow: 0 0 40px rgba(0, 36, 193, 0.06);
+}

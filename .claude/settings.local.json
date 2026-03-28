@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(npx vite:*)",
+      "Bash(find /tmp -maxdepth 3 -type f \\\\\\(-name *.png -o -name *.jpg -o -name *.jpeg -o -name *.webp \\\\\\) -size +100k)",
+      "Bash(find C:/Users/nojus/Downloads C:/Users/nojus/Desktop C:/Users/nojus/Pictures -maxdepth 2 -type f \\\\\\(-name *.png -o -name *.jpg -o -name *.jpeg \\\\\\) -size +500k)",
+      "Bash(find C:/Users/nojus -maxdepth 4 -name *collage* -o -name *mosaic* -o -name *photo-grid*)",
+      "Bash(ls -lt /tmp/*.png /tmp/*.jpg /tmp/*.jpeg)"
+    ]
+  }
+}

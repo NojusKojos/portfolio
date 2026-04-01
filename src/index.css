@@ -23,8 +23,8 @@
 
 :root {
   /* --- Typography --- */
-  --font-display: 'Roobert', 'Syne', sans-serif;
-  --font-hero: 'Google Sans', 'Roobert', sans-serif;
+  --font-display: 'Arial Narrow', 'Roobert', 'Syne', sans-serif;
+  --font-hero: 'Arial Narrow', 'Google Sans', 'Roobert', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
@@ -65,7 +65,7 @@
   --text-xl: clamp(2rem, 4vw, 3.5rem);
   --text-2xl: clamp(3rem, 7vw, 6rem);
   --text-3xl: clamp(4rem, 10vw, 9rem);
-  --text-hero: clamp(5rem, 14vw, 14rem);
+  --text-hero: clamp(6rem, 18vw, 20rem);
 
   /* --- Motion --- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,6 +81,41 @@
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-pill: 0px;
+
+  /* --- Nav glassmorphism (overridden in dark) --- */
+  --nav-glass: rgba(255,255,255,0.70);
+  --nav-grid-line: rgba(0,36,193,0.04);
+  --hero-grid-line: rgba(0,36,193,0.03);
+  --hero-gradient-blue: rgba(0,36,193,0.08);
+  --hero-gradient-green: rgba(195,244,0,0.06);
+  --stmt-line: rgba(255,255,255,0.06);
+}
+
+/* ============================================================
+   DARK THEME — Digital Avant-Garde (Dark)
+   ============================================================ */
+
+[data-theme="dark"] {
+  --color-bg: #0a0a0a;
+  --color-bg-alt: #111111;
+  --color-surface: #1a1a1a;
+  --color-surface-lowest: #0f0f0f;
+  --color-border: rgba(255,255,255,0.08);
+  --color-text: #f0f0f0;
+  --color-text-muted: rgba(240,240,240,0.4);
+  --color-text-secondary: rgba(240,240,240,0.65);
+  --color-accent: #c3f400;
+  --color-accent-text: #161f00;
+  --color-primary: #4d6fff;
+  --color-primary-container: #3355ff;
+  --color-red: #ff5555;
+
+  --nav-glass: rgba(10,10,10,0.75);
+  --nav-grid-line: rgba(77,111,255,0.06);
+  --hero-grid-line: rgba(77,111,255,0.04);
+  --hero-gradient-blue: rgba(77,111,255,0.1);
+  --hero-gradient-green: rgba(195,244,0,0.04);
+  --stmt-line: rgba(255,255,255,0.04);
 }
 
 /* ============================================================
@@ -95,7 +130,7 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by Lenis */
   overflow-x: hidden;
 }
 
@@ -107,6 +142,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   cursor: auto;
+  transition: background-color 0.4s ease, color 0.4s ease;
 
   /* Crisp font rendering */
   -webkit-font-smoothing: antialiased;
@@ -231,3 +267,25 @@ ul, ol {
 .ambient-glow {
   box-shadow: 0 0 40px rgba(0, 36, 193, 0.06);
 }
+
+/* ============================================================
+   THEME TRANSITION — smooth color shifts on toggle
+   ============================================================ */
+
+section, footer, nav, header, div {
+  transition: background-color 0.4s ease;
+}
+
+[data-theme="dark"] .ambient-glow {
+  box-shadow: 0 0 40px rgba(77, 111, 255, 0.08);
+}
+
+[data-theme="dark"] ::selection {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* NOJUS logo theme swap */
+.nojus-logo-dark { display: none !important; }
+[data-theme="dark"] .nojus-logo-light { display: none !important; }
+[data-theme="dark"] .nojus-logo-dark { display: block !important; }

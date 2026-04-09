@@ -1,3 +1,7 @@
+if (import.meta.env.DEV) {
+  import("react-grab");
+}
+
 /**
  * Application entry point.
  * Mounts the React application with StrictMode enabled.

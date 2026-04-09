@@ -15,7 +15,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import MarqueeText from '../components/MarqueeText';
 import TextReveal from '../components/TextReveal';
-import MagneticButton from '../components/MagneticButton';
+import CreativeButton from '../components/CreativeButton';
 import Footer from '../components/Footer';
 import { fadeUp, staggerContainer, easeOutExpo } from '../utils/animations';
 
@@ -84,200 +84,171 @@ const Home: React.FC = () => {
   return (
     <div>
       {/* ================================================================
-          SECTION 1: HERO
+          SECTION 1: HERO — immersive full-viewport typographic entrance
           ================================================================ */}
       <section
         ref={heroRef}
-        style={{ position: 'relative', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', overflow: 'hidden' }}
+        style={{ position: 'relative', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'hidden' }}
       >
-        {/* Background gradient field */}
+        {/* Layered gradient background */}
         <motion.div
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'radial-gradient(ellipse 80% 60% at 70% 40%, rgba(0,36,193,0.08) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 60%, rgba(195,244,0,0.06) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse 70% 50% at 50% 45%, var(--hero-gradient-blue) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 80% 70%, var(--hero-gradient-green) 0%, transparent 60%), radial-gradient(ellipse 40% 35% at 15% 30%, var(--hero-gradient-blue) 0%, transparent 50%)',
             y: heroY,
             scale: heroScale,
           }}
         />
 
-        {/* Grid overlay */}
+        {/* Subtle grid overlay */}
         <div style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'linear-gradient(rgba(0,36,193,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,36,193,0.03) 1px, transparent 1px)',
-          backgroundSize: '100px 100px',
+          backgroundImage: 'linear-gradient(var(--hero-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
           pointerEvents: 'none',
+          opacity: 0.7,
         }} />
 
-        {/* Hero text */}
+        {/* Accent line — vertical */}
         <motion.div
-          style={{ position: 'relative', zIndex: 2, padding: '0 var(--margin) var(--space-xl)', opacity: heroOpacity }}
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 1.4, ease: easeOutExpo, delay: 0.6 }}
+          style={{
+            position: 'absolute',
+            left: 'var(--margin)',
+            top: '15%',
+            bottom: '15%',
+            width: '1px',
+            background: 'linear-gradient(to bottom, transparent, var(--color-primary), transparent)',
+            transformOrigin: 'top',
+            opacity: 0.2,
+          }}
+        />
+
+        {/* Main content — left aligned */}
+        <motion.div
+          style={{ position: 'relative', zIndex: 2, textAlign: 'left', width: '100%', padding: '0 var(--margin)', opacity: heroOpacity }}
         >
-          {/* Index tag */}
+          {/* Top tag */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: easeOutExpo }}
-            style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}
+            transition={{ delay: 0.4, duration: 0.8, ease: easeOutExpo }}
+            style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: 'var(--space-md)' }}
           >
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Artist
             </span>
-            <span style={{ width: '40px', height: '1px', background: 'var(--color-primary)' }} />
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+            <span style={{ width: '50px', height: '1px', background: 'var(--color-primary)', opacity: 0.4 }} />
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
               Producer
             </span>
           </motion.div>
 
-          {/* Main headline */}
+          {/* Name — single line */}
           <div style={{ overflow: 'hidden', paddingBottom: '0.15em' }}>
             <motion.h1
-              initial={{ y: '100%' }}
+              initial={{ y: '110%' }}
               animate={{ y: '0%' }}
-              transition={{ duration: 1.1, ease: easeOutExpo, delay: 0.1 }}
+              transition={{ duration: 1.2, ease: easeOutExpo, delay: 0.1 }}
               style={{
                 fontFamily: 'var(--font-hero)',
-                fontSize: 'var(--text-hero)',
+                fontSize: 'clamp(3rem, 9.5vw, 13rem)',
                 fontWeight: 400,
-                lineHeight: 0.88,
-                letterSpacing: '-0.04em',
+                lineHeight: 1.1,
+                letterSpacing: '-0.05em',
                 color: 'var(--color-text)',
+                whiteSpace: 'nowrap',
+                paddingBottom: '0.1em',
               }}
             >
-              Nojus
-            </motion.h1>
-          </div>
-          <div style={{ overflow: 'hidden' }}>
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: '0%' }}
-              transition={{ duration: 1.1, ease: easeOutExpo, delay: 0.18 }}
-              style={{
-                fontFamily: 'var(--font-hero)',
-                fontSize: 'var(--text-hero)',
-                fontWeight: 400,
-                lineHeight: 0.88,
-                letterSpacing: '-0.04em',
-                color: 'var(--color-text)',
-              }}
-            >
-              Pečiukonis
+              Nojus Pečiukonis
             </motion.h1>
           </div>
 
-          {/* CTA row */}
+          {/* CTA row — centered below name */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: easeOutExpo }}
-            style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginTop: 'var(--space-md)', flexWrap: 'wrap' }}
+            transition={{ delay: 0.9, duration: 0.8, ease: easeOutExpo }}
+            style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginTop: 'var(--space-lg)', flexWrap: 'wrap' }}
           >
-            <MagneticButton>
-              <a
-                href="https://open.spotify.com/artist/5DCeuEaJI3qICAOZOQde0I"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '0.875rem 2rem',
-                  background: 'var(--color-accent)',
-                  color: 'var(--color-accent-text)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                Listen on Spotify
-              </a>
-            </MagneticButton>
+            <CreativeButton
+              href="https://open.spotify.com/artist/5DCeuEaJI3qICAOZOQde0I"
+              target="_blank"
+              rel="noopener noreferrer"
+              bg="var(--color-accent)"
+              hoverBg="var(--color-text)"
+              color="var(--color-accent-text)"
+              hoverColor="var(--color-bg)"
+              borderColor="var(--color-accent)"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              Listen on Spotify
+            </CreativeButton>
 
-            <MagneticButton>
-              <Link
-                to="/music"
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  color: 'var(--color-text-secondary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                }}
-              >
-                Explore Music
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </MagneticButton>
+            <CreativeButton
+              href="/music"
+              borderColor="var(--color-text-secondary)"
+              color="var(--color-text-secondary)"
+            >
+              Explore Music
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </CreativeButton>
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — bottom center */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
           style={{
             position: 'absolute',
-            right: 'var(--margin)',
-            bottom: 'var(--space-xl)',
+            bottom: 'var(--space-md)',
+            left: '50%',
+            transform: 'translateX(-50%)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '0.5rem',
+            gap: '0.75rem',
           }}
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, var(--color-primary), transparent)' }}
-          />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--color-text-muted)', writingMode: 'vertical-rl' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--color-text-muted)' }}>
             Scroll
           </span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, var(--color-text-muted), transparent)' }}
+          />
         </motion.div>
 
-        {/* Corner date stamp */}
+        {/* Corner accents */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.6 }}
           style={{
             position: 'absolute',
-            left: 'var(--margin)',
-            bottom: 'var(--space-xl)',
+            right: 'var(--margin)',
+            top: '50%',
+            transform: 'translateY(-50%)',
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.6rem',
+            fontSize: '0.55rem',
             color: 'var(--color-text-muted)',
             textTransform: 'uppercase',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.15em',
+            writingMode: 'vertical-rl',
+            opacity: 0.4,
           }}
         >
-          Est. 2020 · Lithuania
+          Electronic / Ambient
         </motion.div>
       </section>
-
-      {/* ================================================================
-          SECTION 2: MARQUEE STRIP
-          ================================================================ */}
-      <section style={{
-        padding: '1.25rem 0',
-        background: 'var(--color-bg-alt)',
-        overflow: 'hidden',
-      }}>
-        <MarqueeText
-          text="NOJUS PECIUKONIS · PRODUCER · ARTIST · ELECTRONIC · AMBIENT · EXPERIMENTAL"
-          speed={35}
-          style={{ fontSize: 'var(--text-xs)', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}
-        />
-      </section>
-
       {/* ================================================================
           SECTION 3: FEATURED RELEASES
           ================================================================ */}
@@ -339,12 +310,42 @@ const Home: React.FC = () => {
         <div style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.06) 79px, rgba(255,255,255,0.06) 80px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 79px, var(--stmt-line) 79px, var(--stmt-line) 80px)',
         }} />
 
-        <div style={{ position: 'relative', zIndex: 1, padding: 'var(--space-xl) var(--margin)', maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
+        {/* Portrait image — right side */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.05 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: easeOutExpo, delay: 0.3 }}
+          style={{
+            position: 'absolute',
+            right: 'var(--margin)',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 'clamp(250px, 30vw, 450px)',
+            aspectRatio: '3/4',
+            overflow: 'hidden',
+            zIndex: 1,
+          }}
+        >
+          <img
+            src="/images/statement-photo.png"
+            alt="Nojus Pečiukonis"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              mixBlendMode: 'luminosity',
+              opacity: 0.55,
+            }}
+          />
+        </motion.div>
+
+        <div style={{ position: 'relative', zIndex: 2, padding: 'var(--space-xl) var(--margin)', maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
           <TextReveal
-            text="SOUND IS NOT HEARD. IT IS FELT."
+            text=""
             tag="h2"
             delay={0}
             style={{
@@ -363,32 +364,22 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.8, ease: easeOutExpo }}
-            style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', alignItems: 'flex-start' }}
+            style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', alignItems: 'flex-start', maxWidth: '55%' }}
           >
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'rgba(255,255,255,0.7)', maxWidth: '480px', lineHeight: 1.7 }}>
               Nojus Peciukonis crafts sonic worlds that blur the line between the physical and the abstract — electronic compositions built from texture, space, and deliberate silence.
             </p>
-            <MagneticButton>
-              <Link
-                to="/about"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  padding: '1rem 2rem',
-                  background: 'var(--color-accent)',
-                  color: 'var(--color-accent-text)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                About Me
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </MagneticButton>
+            <CreativeButton
+              href="/about"
+              bg="rgba(255,255,255,0.15)"
+              hoverBg="#ffffff"
+              color="#ffffff"
+              hoverColor="var(--color-primary)"
+              borderColor="rgba(255,255,255,0.3)"
+            >
+              About Me
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </CreativeButton>
           </motion.div>
         </div>
       </section>
@@ -433,38 +424,6 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* ================================================================
-          SECTION 7: EDITORIAL QUOTE
-          ================================================================ */}
-      <section style={{ padding: 'var(--space-2xl) var(--margin)', overflow: 'hidden' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
-          <TextReveal
-            text='"Music is the architecture of time."'
-            tag="blockquote"
-            delay={0}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 700,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.05,
-              color: 'var(--color-text)',
-              marginBottom: '2rem',
-            }}
-          />
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8, duration: 0.7 }}
-            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
-          >
-            — Nojus Peciukonis
-          </motion.p>
-        </div>
-      </section>
-
       {/* ================================================================
           SECTION 8: CONTACT CTA
           ================================================================ */}
@@ -478,27 +437,10 @@ const Home: React.FC = () => {
               Let's create something.
             </h2>
           </div>
-          <MagneticButton>
-            <Link
-              to="/contact"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '1.25rem 2.5rem',
-                background: 'var(--color-accent)',
-                color: 'var(--color-accent-text)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-              }}
-            >
-              Get in touch
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
-          </MagneticButton>
+          <CreativeButton href="/contact">
+            Get in touch
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </CreativeButton>
         </div>
       </section>
 

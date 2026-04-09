@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
 import TextReveal from '../components/TextReveal';
-import MagneticButton from '../components/MagneticButton';
+import CreativeButton from '../components/CreativeButton';
 import { easeOutExpo } from '../utils/animations';
 
 interface FormField {
@@ -40,104 +40,35 @@ const Contact: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '80px' }}>
-      {/* Hero */}
-      <section style={{ padding: 'var(--space-xl) var(--margin)', minHeight: '50vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: easeOutExpo }}
-            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--color-primary)', marginBottom: '1.5rem' }}
-          >
-            04 / Contact
-          </motion.p>
-
-          <div style={{ overflow: 'hidden' }}>
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: '0%' }}
-              transition={{ duration: 1.1, ease: easeOutExpo, delay: 0.1 }}
-              style={{ fontFamily: 'var(--font-hero)', fontSize: 'var(--text-3xl)', fontWeight: 400, letterSpacing: '-0.04em', lineHeight: 0.88, color: 'var(--color-text)' }}
-            >
-              Let's
-            </motion.h1>
-          </div>
-          <div style={{ overflow: 'hidden' }}>
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: '0%' }}
-              transition={{ duration: 1.1, ease: easeOutExpo, delay: 0.18 }}
-              style={{ fontFamily: 'var(--font-hero)', fontSize: 'var(--text-3xl)', fontWeight: 400, letterSpacing: '-0.04em', lineHeight: 0.88, color: 'var(--color-text)' }}
-            >
-              Connect
-            </motion.h1>
-          </div>
-        </div>
-      </section>
-
-      {/* bg shift separator */}
-
       {/* Main content — two column */}
-      <section style={{ padding: 'var(--space-xl) var(--margin)' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-xl)', alignItems: 'start' }}>
+      <section style={{ padding: 'var(--space-xl) var(--margin)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: 'var(--space-xl)', alignItems: 'start' }}>
           {/* Info column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.3 }}
+            transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.2 }}
           >
-            {/* Contact details — Swiss data style */}
+            {/* Contact details — larger Swiss data style */}
             <div style={{ marginBottom: 'var(--space-lg)' }}>
               {[
                 { label: 'Email', value: 'peciukonisnojus@gmail.com' },
                 { label: 'Location', value: 'Brussels' },
               ].map(({ label, value }) => (
-                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0.75rem', alignItems: 'center', background: 'var(--color-bg-alt)' }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-text-muted)' }}>{label}</span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>{value}</span>
+                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '1.5rem 1rem', alignItems: 'center', background: 'var(--color-bg-alt)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-text-muted)' }}>{label}</span>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', color: 'var(--color-text-secondary)' }}>{value}</span>
                 </div>
               ))}
             </div>
 
-            {/* Social links */}
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>Platforms</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {[
-                { name: 'Spotify', url: 'https://open.spotify.com/artist/5DCeuEaJI3qICAOZOQde0I' },
-                { name: 'Instagram', url: '#' },
-                { name: 'SoundCloud', url: '#' },
-                { name: 'YouTube', url: '#' },
-              ].map(({ name, url }) => (
-                <MagneticButton key={name} strength={0.2}>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.875rem 0',
-                      fontFamily: 'var(--font-body)',
-                      fontSize: '0.875rem',
-                      color: 'var(--color-text-secondary)',
-                      transition: 'color 0.25s',
-                      minWidth: '200px',
-                    }}
-                  >
-                    {name}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                  </a>
-                </MagneticButton>
-              ))}
-            </div>
           </motion.div>
 
           {/* Form column */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
+            transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.3 }}
           >
             <AnimatePresence mode="wait">
               {submitted ? (
@@ -163,7 +94,7 @@ const Contact: React.FC = () => {
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+                  style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
                 >
                   {FORM_FIELDS.map((field) => (
                     <div key={field.id}>
@@ -172,7 +103,7 @@ const Contact: React.FC = () => {
                         style={{
                           display: 'block',
                           fontFamily: 'var(--font-mono)',
-                          fontSize: '0.65rem',
+                          fontSize: '0.75rem',
                           textTransform: 'uppercase',
                           letterSpacing: '0.12em',
                           color: focused === field.id ? 'var(--color-accent)' : 'var(--color-text-muted)',
@@ -193,13 +124,13 @@ const Contact: React.FC = () => {
                         onBlur={() => setFocused(null)}
                         style={{
                           width: '100%',
-                          padding: '1rem 0',
+                          padding: '1.25rem 0',
                           background: 'transparent',
                           border: 'none',
                           borderBottom: `${focused === field.id ? '2px' : '1px'} solid ${focused === field.id ? 'var(--color-primary)' : 'var(--color-surface)'}`,
                           color: 'var(--color-text)',
                           fontFamily: 'var(--font-body)',
-                          fontSize: '1rem',
+                          fontSize: '1.15rem',
                           outline: 'none',
                           transition: 'border-color 0.25s',
                           cursor: 'text',
@@ -251,49 +182,26 @@ const Contact: React.FC = () => {
                     />
                   </div>
 
-                  <MagneticButton strength={0.2} style={{ alignSelf: 'flex-start', marginTop: '1rem' }}>
-                    <button
-                      type="submit"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        padding: '1.25rem 3rem',
-                        background: 'var(--color-accent)',
-                        color: 'var(--color-accent-text)',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8rem',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      Send Message
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-                    </button>
-                  </MagneticButton>
+                  <CreativeButton
+                    onClick={() => {
+                      const form = document.querySelector('form');
+                      if (form) form.requestSubmit();
+                    }}
+                    bg="var(--color-accent)"
+                    hoverBg="var(--color-text)"
+                    color="var(--color-accent-text)"
+                    hoverColor="var(--color-bg)"
+                    borderColor="var(--color-accent)"
+                    strength={0.2}
+                    style={{ padding: '1.5rem 3.5rem', fontSize: '0.9rem', alignSelf: 'flex-start', marginTop: '1rem' }}
+                  >
+                    Send Message
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                  </CreativeButton>
                 </motion.form>
               )}
             </AnimatePresence>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Large typographic CTA at bottom */}
-      <section style={{ padding: 'var(--space-xl) var(--margin)', background: 'var(--color-bg-alt)', overflow: 'hidden' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
-          <TextReveal
-            text="Sound connects everything."
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 800,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.0,
-              color: 'var(--color-text-muted)',
-            }}
-          />
         </div>
       </section>
 

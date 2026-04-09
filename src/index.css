@@ -23,8 +23,8 @@
 
 :root {
   /* --- Typography --- */
-  --font-display: 'Arial Narrow', 'Roobert', 'Syne', sans-serif;
-  --font-hero: 'Arial Narrow', 'Google Sans', 'Roobert', sans-serif;
+  --font-display: 'Roobert', 'Syne', sans-serif;
+  --font-hero: 'Google Sans', 'Roobert', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'Space Mono', monospace;
 

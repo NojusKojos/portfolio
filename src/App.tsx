@@ -3,8 +3,10 @@
  * Sets up routing, global overlays (cursor, scroll progress),
  * and the page transition system.
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
+import { ThemeProvider } from './context/ThemeContext';
 import Navigation from './components/Navigation';
 
 import ScrollProgress from './components/ScrollProgress';
@@ -17,6 +19,30 @@ import Contact from './pages/Contact';
 /** Inner router content — needed to access useLocation inside Router */
 const AppContent: React.FC = () => {
   const location = useLocation();
+
+  // Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <>
@@ -35,9 +61,11 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => (
-  <Router>
-    <AppContent />
-  </Router>
+  <ThemeProvider>
+    <Router>
+      <AppContent />
+    </Router>
+  </ThemeProvider>
 );
 
 export default App;

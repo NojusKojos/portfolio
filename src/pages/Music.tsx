@@ -43,7 +43,7 @@ const Music: React.FC = () => {
             transition={{ duration: 0.7, ease: easeOutExpo }}
             style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--color-primary)', marginBottom: '1.5rem' }}
           >
-            03 / Music
+
           </motion.p>
 
           <div style={{ overflow: 'hidden' }}>

@@ -1,0 +1,19 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{ts,tsx}"
+      run: pnpm oxlint {staged_files}
+      stage_fixed: true
+    type-check:
+      run: pnpm tsc --noEmit
+
+commit-msg:
+  scripts:
+    "check.sh":
+      runner: bash
+
+pre-push:
+  commands:
+    build:
+      run: pnpm build

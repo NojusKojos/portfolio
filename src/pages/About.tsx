@@ -13,6 +13,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Footer from '../components/Footer';
 import TextReveal from '../components/TextReveal';
 import CreativeButton from '../components/CreativeButton';
+import SEO from '../components/SEO';
 import { fadeUp, staggerContainer, easeOutExpo } from '../utils/animations';
 
 interface TimelineItem {
@@ -41,6 +42,11 @@ const About: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '80px' }}>
+      <SEO
+        title="About"
+        description="Learn about Nojus Peciukonis — music artist and producer from Lithuania crafting sonic worlds at the intersection of electronic music and ambient texture."
+        path="/about"
+      />
       {/* ================================================================
           HERO — full-width split: text left, portrait right
           ================================================================ */}
@@ -49,7 +55,7 @@ const About: React.FC = () => {
         style={{
           minHeight: '90vh',
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -156,7 +162,7 @@ const About: React.FC = () => {
           }}
         >
           <img
-            src="/images/portrait.png"
+            src="/images/portrait.webp"
             alt="Nojus Pečiukonis"
             style={{
               width: '100%',
@@ -250,8 +256,8 @@ const About: React.FC = () => {
                 variants={fadeUp}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '80px 1fr 2fr',
-                  gap: '2rem',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+                  gap: '1rem 2rem',
                   alignItems: 'start',
                   padding: '2rem 0',
                 }}

@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
         {/* ── Column grid with top-border headers ── */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
           gap: '0',
         }}>
           {FOOTER_COLUMNS.map((col, colIdx) => (
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: easeOutExpo, delay: colIdx * 0.08 }}
               style={{
-                gridColumn: col.span === 2 ? 'span 2' : 'span 1',
+                gridColumn: 'auto',
                 paddingRight: 'var(--grid-gap)',
               }}
             >

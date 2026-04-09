@@ -9,6 +9,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { staggerContainer, fadeUp, easeOutExpo } from '../utils/animations';
 
 interface Track {
@@ -34,6 +35,11 @@ const Music: React.FC = () => {
 
   return (
     <div style={{ paddingTop: '80px' }}>
+      <SEO
+        title="Music"
+        description="Explore the discography of Nojus Peciukonis — electronic, ambient, and experimental sound design releases."
+        path="/music"
+      />
       {/* Hero */}
       <section style={{ padding: 'var(--space-xl) var(--margin)', minHeight: '50vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
         <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%' }}>

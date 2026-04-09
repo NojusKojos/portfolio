@@ -14,6 +14,7 @@ interface ParallaxImageProps {
   src: string;
   alt: string;
   factor?: number;
+  loading?: 'lazy' | 'eager';
   className?: string;
   style?: React.CSSProperties;
   containerStyle?: React.CSSProperties;
@@ -23,6 +24,7 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
   src,
   alt,
   factor = 0.15,
+  loading = 'lazy',
   className,
   style,
   containerStyle,
@@ -43,6 +45,7 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
       <motion.img
         src={src}
         alt={alt}
+        loading={loading}
         className={className}
         style={{
           width: '100%',

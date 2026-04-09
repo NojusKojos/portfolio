@@ -10,6 +10,9 @@ import React, { useEffect, useState } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const CustomCursor: React.FC = () => {
+  const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
@@ -50,6 +53,8 @@ const CustomCursor: React.FC = () => {
       observer.disconnect();
     };
   }, [cursorX, cursorY]);
+
+  if (isTouchDevice || prefersReducedMotion) return null;
 
   return (
     <>

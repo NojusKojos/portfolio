@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nojus.vercel.app/sitemap.xml

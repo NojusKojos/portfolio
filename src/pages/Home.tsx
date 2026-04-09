@@ -15,6 +15,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import TextReveal from '../components/TextReveal';
 import CreativeButton from '../components/CreativeButton';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { fadeUp, staggerContainer, easeOutExpo } from '../utils/animations';
 
 /** Individual release card data */
@@ -28,7 +29,7 @@ interface Release {
 }
 
 const RELEASES: Release[] = [
-  { id: '1', title: 'The Little Things in Life', year: '2025', genre: 'Ambient / Botanica', index: '001', color: '#0024c1' },
+  { id: '1', title: 'The Little Things in Life', year: '2025', genre: 'Ambient / Botanica', index: '001', color: 'var(--color-primary)' },
 ];
 
 /** Animated stat counter component */
@@ -81,6 +82,10 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <SEO
+        description="Nojus Peciukonis — Music artist and producer crafting sonic worlds at the intersection of electronic music, ambient texture, and experimental sound design."
+        path="/"
+      />
       {/* ================================================================
           SECTION 1: HERO — immersive full-viewport typographic entrance
           ================================================================ */}
@@ -294,7 +299,7 @@ const Home: React.FC = () => {
           ================================================================ */}
       <section
         ref={stmtRef}
-        style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: 'linear-gradient(135deg, #0024c1, #0033ff)' }}
+        style={{ position: 'relative', minHeight: '80vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-container))' }}
       >
         {/* Parallax background texture */}
         <motion.div
@@ -322,14 +327,15 @@ const Home: React.FC = () => {
             right: 'var(--margin)',
             top: '50%',
             transform: 'translateY(-50%)',
-            width: 'clamp(250px, 30vw, 450px)',
+            width: 'clamp(120px, 25vw, 450px)',
             aspectRatio: '3/4',
             overflow: 'hidden',
             zIndex: 1,
           }}
         >
           <img
-            src="/images/statement-photo.png"
+            src="/images/statement-photo.webp"
+            loading="lazy"
             alt="Nojus Pečiukonis"
             style={{
               width: '100%',
@@ -352,7 +358,7 @@ const Home: React.FC = () => {
               fontWeight: 800,
               lineHeight: 0.9,
               letterSpacing: '-0.04em',
-              color: '#ffffff',
+              color: 'var(--color-surface-lowest)',
               marginBottom: 'var(--space-lg)',
             }}
           />
@@ -362,7 +368,7 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.8, ease: easeOutExpo }}
-            style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', alignItems: 'flex-start', maxWidth: '55%' }}
+            style={{ display: 'flex', gap: '4rem', flexWrap: 'wrap', alignItems: 'flex-start', maxWidth: 'min(55%, 100vw - 2 * var(--margin))' }}
           >
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'rgba(255,255,255,0.7)', maxWidth: '480px', lineHeight: 1.7 }}>
               Nojus Peciukonis crafts sonic worlds that blur the line between the physical and the abstract — electronic compositions built from texture, space, and deliberate silence.
@@ -370,8 +376,8 @@ const Home: React.FC = () => {
             <CreativeButton
               href="/about"
               bg="rgba(255,255,255,0.15)"
-              hoverBg="#ffffff"
-              color="#ffffff"
+              hoverBg="var(--color-surface-lowest)"
+              color="var(--color-surface-lowest)"
               hoverColor="var(--color-primary)"
               borderColor="rgba(255,255,255,0.3)"
             >
@@ -471,7 +477,8 @@ const ReleaseCard: React.FC<{ release: Release; index: number }> = ({ release })
     >
       {/* Background image */}
       <motion.img
-        src="/images/featured-release.png"
+        src="/images/featured-release.webp"
+        loading="lazy"
         alt={release.title}
         style={{
           position: 'absolute',
@@ -510,7 +517,7 @@ const ReleaseCard: React.FC<{ release: Release; index: number }> = ({ release })
 
         <div>
           <motion.h3
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem', color: '#ffffff' }}
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem', color: 'var(--color-surface-lowest)' }}
             animate={{ y: hovered ? -4 : 0 }}
             transition={{ duration: 0.4, ease: easeOutExpo }}
           >

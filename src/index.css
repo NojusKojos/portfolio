@@ -3,11 +3,9 @@
    Swiss design principles: grid, precision, typography
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-
 @font-face {
   font-family: 'Roobert';
-  src: url('/fonts/Roobert-Regular.otf') format('opentype');
+  src: url('/fonts/Roobert-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,7 +13,7 @@
 
 @font-face {
   font-family: 'Google Sans';
-  src: url('/fonts/GoogleSans-Regular.ttf') format('truetype');
+  src: url('/fonts/GoogleSans-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -272,8 +270,39 @@ ul, ol {
    THEME TRANSITION — smooth color shifts on toggle
    ============================================================ */
 
-section, footer, nav, header, div {
+section, footer, nav, header {
   transition: background-color 0.4s ease;
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --margin: 16px;
+    --grid-gap: 16px;
+    --space-xl: 4rem;
+    --space-2xl: 6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 [data-theme="dark"] .ambient-glow {

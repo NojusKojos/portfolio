@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
 import CreativeButton from '../components/CreativeButton';
+import SEO from '../components/SEO';
 import { easeOutExpo } from '../utils/animations';
 
 interface FormField {
@@ -31,17 +32,45 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [focused, setFocused] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          ...formData,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div style={{ paddingTop: '80px' }}>
+      <SEO
+        title="Contact"
+        description="Get in touch with Nojus Peciukonis for bookings, collaborations, and press inquiries."
+        path="/contact"
+      />
       {/* Main content — two column */}
       <section style={{ padding: 'var(--space-xl) var(--margin)', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
-        <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: 'var(--space-xl)', alignItems: 'start' }}>
+        <div style={{ maxWidth: '1600px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: 'var(--space-xl)', alignItems: 'start' }}>
           {/* Info column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -181,6 +210,12 @@ const Contact: React.FC = () => {
                     />
                   </div>
 
+                  {error && (
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--color-red)' }}>
+                      Something went wrong. Please try again or email directly.
+                    </p>
+                  )}
+
                   <CreativeButton
                     onClick={() => {
                       const form = document.querySelector('form');
@@ -192,10 +227,10 @@ const Contact: React.FC = () => {
                     hoverColor="var(--color-bg)"
                     borderColor="var(--color-accent)"
                     strength={0.2}
-                    style={{ padding: '1.5rem 3.5rem', fontSize: '0.9rem', alignSelf: 'flex-start', marginTop: '1rem' }}
+                    style={{ padding: '1.5rem 3.5rem', fontSize: '0.9rem', alignSelf: 'flex-start', marginTop: '1rem', opacity: loading ? 0.6 : 1, pointerEvents: loading ? 'none' : 'auto' }}
                   >
-                    Send Message
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                    {loading ? 'Sending...' : 'Send Message'}
+                    {!loading && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>}
                   </CreativeButton>
                 </motion.form>
               )}

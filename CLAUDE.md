@@ -30,4 +30,24 @@ Strict mode is enforced. Do not use `any` — oxlint will flag it as an error. N
 
 ## Tech Stack
 
-React 18 · TypeScript 5 (strict) · Vite 5 · React Router 6 · Framer Motion 11 · React Three Fiber · Lenis · oxlint · pnpm
+React 18 · TypeScript 5 (strict) · Vite 5 · React Router 6 · Framer Motion 11 · React Three Fiber · Lenis · react-helmet-async · oxlint · pnpm
+
+## Architecture
+
+- **Routing**: React Router 6 with `React.lazy` code splitting per page + `Suspense` fallback
+- **Pages**: `src/pages/` — Home, About, Music, Contact, NotFound (404 catch-all)
+- **Components**: `src/components/` — reusable UI (SEO, Navigation, Footer, CreativeButton, etc.)
+- **Styling**: CSS custom properties (design tokens) in `src/index.css` — always use `var(--color-*)` tokens, never hardcode hex colors in components
+- **Images**: WebP format in `public/images/`, optimized at build time by `vite-plugin-image-optimizer`
+- **Fonts**: woff2 format in `public/fonts/`, preloaded in `index.html`; Google Fonts loaded via `<link>` in `index.html` only (never `@import` in CSS)
+- **SEO**: `<SEO>` component (react-helmet-async) on every page for per-page title/description/OG tags
+- **Accessibility**: `prefers-reduced-motion` respected, `:focus-visible` styles, ARIA labels on interactive elements, `<main>` landmark wraps page content
+- **Contact form**: Web3Forms API — requires `VITE_WEB3FORMS_KEY` env var (see `.env.example`)
+
+## Environment Variables
+
+- `VITE_WEB3FORMS_KEY` — Web3Forms access key for contact form (set in Vercel dashboard for production)
+
+## Important: This is NOT a Next.js project
+
+This is a **Vite + React SPA**. Ignore any suggestions about `"use client"` directives, Next.js App Router, or server components — they do not apply here.

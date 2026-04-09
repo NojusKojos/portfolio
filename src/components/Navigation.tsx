@@ -31,22 +31,25 @@ const SOCIAL_LINKS: Array<{ label: string; href: string }> = [];
 
 /* ── Animation variants ── */
 
-const menuVariants = {
-  open: {
-    width: 480,
-    height: 650,
-    top: -25,
-    right: -25,
-    transition: { duration: 0.75, type: 'tween', ease: [0.76, 0, 0.24, 1] },
-  },
-  closed: {
-    width: 100,
-    height: 40,
-    top: 0,
-    right: 0,
-    transition: { duration: 0.75, delay: 0.35, type: 'tween', ease: [0.76, 0, 0.24, 1] },
-  },
-};
+function getMenuVariants() {
+  const mobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  return {
+    open: {
+      width: mobile ? window.innerWidth : 480,
+      height: mobile ? window.innerHeight : 650,
+      top: mobile ? -28 : -25,
+      right: mobile ? -16 : -25,
+      transition: { duration: 0.75, type: 'tween' as const, ease: [0.76, 0, 0.24, 1] },
+    },
+    closed: {
+      width: 100,
+      height: 40,
+      top: 0,
+      right: 0,
+      transition: { duration: 0.75, delay: 0.35, type: 'tween' as const, ease: [0.76, 0, 0.24, 1] },
+    },
+  };
+}
 
 const perspective = {
   initial: {
@@ -140,9 +143,20 @@ const Navigation: React.FC = () => {
     setMenuOpen(false);
   }, [location]);
 
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) setMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen]);
+
   return (
     <>
       <motion.nav
+        role="navigation"
+        aria-label="Main navigation"
         style={{
           position: 'fixed',
           top: 0,
@@ -201,7 +215,7 @@ const Navigation: React.FC = () => {
           <div style={{ position: 'relative' }}>
             {/* The expanding rounded rectangle */}
             <motion.div
-              variants={menuVariants}
+              variants={getMenuVariants()}
               animate={menuOpen ? 'open' : 'closed'}
               initial="closed"
               style={{
@@ -244,7 +258,7 @@ const Navigation: React.FC = () => {
                                 fontSize: 'clamp(2rem, 5vw, 2.8rem)',
                                 fontWeight: 700,
                                 letterSpacing: '-0.03em',
-                                color: location.pathname === link.path ? '#ffffff' : 'var(--color-accent-text)',
+                                color: location.pathname === link.path ? 'var(--color-surface-lowest)' : 'var(--color-accent-text)',
                                 textDecoration: 'none',
                                 display: 'block',
                               }}
@@ -287,8 +301,10 @@ const Navigation: React.FC = () => {
             </motion.div>
 
             {/* The button — sits on top of the pill */}
-            <div
+            <button
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               style={{
                 position: 'relative',
                 zIndex: 2,
@@ -300,6 +316,9 @@ const Navigation: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                background: 'none',
+                border: 'none',
+                padding: 0,
               }}
             >
               <motion.div
@@ -347,7 +366,7 @@ const Navigation: React.FC = () => {
                   <PerspectiveText label="Close" />
                 </div>
               </motion.div>
-            </div>
+            </button>
           </div>
         </div>
       </motion.nav>

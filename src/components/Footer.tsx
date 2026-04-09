@@ -6,94 +6,10 @@
  * - Large typographic contact lockup at the bottom
  * - Copyright stamp
  */
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { easeOutExpo } from '../utils/animations';
-
-/* ── NOJUS geometric graphic above footer ── */
-
-const NojusGraphic: React.FC = () => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        padding: 'var(--space-xl) var(--margin)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '35vh',
-        cursor: 'default',
-      }}
-    >
-      {/* Geometric shapes — black in light mode, white in dark mode via var(--color-text) */}
-      <motion.svg
-        viewBox="0 0 800 200"
-        animate={{ opacity: hovered ? 0 : 1, scale: hovered ? 0.95 : 1 }}
-        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-        style={{
-          width: '80%',
-          maxWidth: '900px',
-          fill: 'var(--color-text)',
-        }}
-      >
-        {/* N */}
-        <rect x="30" y="40" width="90" height="120" rx="4" />
-        <rect x="130" y="40" width="70" height="120" rx="4" />
-        <circle cx="155" cy="35" r="14" />
-        <circle cx="30" cy="165" r="14" />
-        {/* O */}
-        <rect x="225" y="40" width="100" height="120" rx="4" />
-        <circle cx="275" cy="35" r="14" />
-        <circle cx="275" cy="165" r="14" />
-        {/* J */}
-        <rect x="355" y="40" width="90" height="120" rx="4" />
-        <circle cx="400" cy="35" r="14" />
-        <circle cx="355" cy="165" r="14" />
-        {/* U */}
-        <rect x="475" y="40" width="90" height="120" rx="4" />
-        <circle cx="520" cy="35" r="14" />
-        <circle cx="475" cy="165" r="14" />
-        {/* S */}
-        <rect x="595" y="40" width="100" height="120" rx="4" />
-        <circle cx="695" cy="100" r="14" />
-        <circle cx="645" cy="35" r="14" />
-      </motion.svg>
-
-      {/* Text layer — appears on hover */}
-      <motion.div
-        animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 30 }}
-        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: 'var(--font-hero)',
-            fontSize: 'clamp(4rem, 15vw, 16rem)',
-            fontWeight: 400,
-            letterSpacing: '-0.04em',
-            color: 'var(--color-text)',
-            lineHeight: 1,
-            userSelect: 'none',
-          }}
-        >
-          NOJUS
-        </h2>
-      </motion.div>
-    </div>
-  );
-};
 
 const FOOTER_COLUMNS = [
   {

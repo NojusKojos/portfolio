@@ -10,7 +10,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
-import TextReveal from '../components/TextReveal';
 import CreativeButton from '../components/CreativeButton';
 import { easeOutExpo } from '../utils/animations';
 

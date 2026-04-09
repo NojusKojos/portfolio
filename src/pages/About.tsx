@@ -10,10 +10,8 @@
  */
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import TextReveal from '../components/TextReveal';
-import MarqueeText from '../components/MarqueeText';
 import CreativeButton from '../components/CreativeButton';
 import { fadeUp, staggerContainer, easeOutExpo } from '../utils/animations';
 

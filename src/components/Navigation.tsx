@@ -27,9 +27,7 @@ const NAV_LINKS: NavLink[] = [
   { label: 'Contact', path: '/contact' },
 ];
 
-const SOCIAL_LINKS = [
-  
-];
+const SOCIAL_LINKS: Array<{ label: string; href: string }> = [];
 
 /* ── Animation variants ── */
 

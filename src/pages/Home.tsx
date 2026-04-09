@@ -12,8 +12,6 @@
  */
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import MarqueeText from '../components/MarqueeText';
 import TextReveal from '../components/TextReveal';
 import CreativeButton from '../components/CreativeButton';
 import Footer from '../components/Footer';
